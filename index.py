@@ -6,7 +6,7 @@ import json
 import time
 import serial
 import requests
-from lxml import etree     
+import xml.etree.ElementTree as ET   
 from random import randint
 
 ser = serial.Serial(
@@ -18,11 +18,11 @@ ser = serial.Serial(
     timeout=1
 )
 
-busapi = requests.get(os.getenv('BUSHEA')+str(randint(12,20)))
-tree = etree.parse(busapi)
-loc = tree.xpath('/arrival/headsign')
-direction = tree.xpath('/arrival/direction')
-
+busapi = requests.get("http://api.thebus.org/arrivals/", params=[('key', os.getenv('BUSHEA')),('stop', str(randint(12,20)))])
+root = ET.fromstring(busapi.text)
+headsign = root[2][3].text
+direction = root[2][5].text
+name = "User"
 while 1:
     x=ser.readline()
     if(x != ''):
@@ -34,11 +34,11 @@ while 1:
         minute = str(randint(10,59))
         time = hour+":"+minute+"PM"
         if(choice == 1):
-            payload = {"channel": "#doorbell-test", "username": "RailFare", "text": name+" purchased rail fare at Halekauwila station at "+time, "icon_emoji": ":monorail:"}
+            payload = {"channel": "#doorbell-test", "username": "RailFare", "text": name+" purchased rail fare at '"+headsign+"' station at "+time, "icon_emoji": ":monorail:"}
         if(choice == 2):
-            payload = {"channel": "#doorbell-test", "username": "TheBusFare", "text": name+" purchased bus fare at "+loc+" ("+direction+") at "+time, "icon_emoji": ":oncoming_bus:"}
+            payload = {"channel": "#doorbell-test", "username": "TheBusFare", "text": name+" purchased bus fare at '"+headsign+"' ("+direction+") at "+time, "icon_emoji": ":oncoming_bus:"}
         if(choice == 3):
-            payload = {"channel": "#doorbell-test", "username": "Bikeshare", "text": name+" purchased a bikeshare ride at Diamond Head station at "+time, "icon_emoji": ":bikeshare:"}
+            payload = {"channel": "#doorbell-test", "username": "Bikeshare", "text": name+" purchased a bikeshare ride at '"+headsign+"' at "+time, "icon_emoji": ":bikeshare:"}
         if "SEND" in x:
             headers = {'Content-Type':'application/json'}
             r = requests.post(os.getenv('ENDPOINT'), headers=headers, data=json.dumps(payload))
