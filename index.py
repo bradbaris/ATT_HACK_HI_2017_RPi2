@@ -23,7 +23,7 @@ while 1:
     if(x != ''):
         print(x)
         if "NAME=" in x:
-            name = x[5:-1]
+            name = x[5:-2]
         num = randint(1,4)
         if(num == 1):
             payload = {"channel": "#doorbell-test", "username": "RailFare", "text": name+" purchased rail fare at Halekauwila station at 5:00PM", "icon_emoji": ":monorail:"}
