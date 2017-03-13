@@ -18,6 +18,8 @@ Setup:
   * `ENDPOINT` refers to the Slack webhook URL
 3. Scan things for the lulz
 
+**See the sibling repo:** https://github.com/bradbaris/ATT_HACK_HI_2017
+
 Notes:
 
 [1] https://raspberrypi.stackexchange.com/questions/51498/sending-data-to-a-raspberry-pi-over-serial-connection?rq=1  
