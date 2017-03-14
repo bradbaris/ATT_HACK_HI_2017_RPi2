@@ -2,7 +2,7 @@ The RPi2 was not in the original scope, but needed to send a POST request and co
 
 Previously, we had also tried using an Arduino Yún and an RPi3, but the Yún required sautering edits to the PN532 chip amongst other changes, and the RPi3 needed [a bunch of extra config](https://raspberrypi.stackexchange.com/questions/45570/how-do-i-make-serial-work-on-the-raspberry-pi3/45571#45571) that didn't quite work the first few tries, and possibly some UART weirdness.  
 
-This is where I also came up with the idea of linking it to [TheBusHEA API](http://hea.thebus.org/api/documentation/Web%20Services%20API.pdf) and having it use actual data, and then sending it to a Slack webhook for output. There was also a Node.js analytics dashboard planned and mocked (to replace the Slack webhook), but didn't make it to the integration stage by presentation time. N.B. Although the data is real, it is chosen at random and arbitarily.  
+This is where I also came up with the idea of linking it to [TheBusHEA API](http://hea.thebus.org/api/documentation/Web%20Services%20API.pdf) and having it use actual data, and then sending it to a Slack webhook for output. There was also an early [analytics dashboard concept](https://github.com/bradbaris/ATT_HACK_HI_2017/blob/master/art/dashboard_concept.png) planned and mocked (to replace the Slack webhook), but didn't make it to the integration stage by presentation time. N.B. Although the data is real, it is chosen at random and arbitarily.  
 
 Setup:  
 
